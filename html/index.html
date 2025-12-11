@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rye&family=Playfair+Display:wght@400;600;700&family=IM+Fell+English+SC&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="shop-container" class="hidden">
+        <!-- Decorative corners -->
+        <div class="corner-decor top-left"></div>
+        <div class="corner-decor top-right"></div>
+        <div class="corner-decor bottom-left"></div>
+        <div class="corner-decor bottom-right"></div>
+
+        <!-- Header -->
+        <div class="shop-header">
+            <div class="header-ornament left">⚜</div>
+            <div class="header-content">
+                <h1 class="shop-title">Pet Shop</h1>
+                <p class="shop-subtitle">— Animal Companions —</p>
+            </div>
+            <div class="header-ornament right">⚜</div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="category-tabs">
+            <button class="tab-btn active" data-category="dog">
+                <span class="tab-icon">🐕</span>
+                <span class="tab-text">Dogs</span>
+            </button>
+            <button class="tab-btn" data-category="cat">
+                <span class="tab-icon">🐈</span>
+                <span class="tab-text">Cats</span>
+            </button>
+        </div>
+
+        <!-- Pet Grid -->
+        <div class="pets-container">
+            <div id="pets-grid" class="pets-grid">
+                <!-- Pet cards will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="shop-footer">
+            <button id="close-btn" class="close-btn">
+                <span class="btn-text">Close Shop</span>
+            </button>
+            <div class="player-money">
+                <span class="money-icon">💰</span>
+                <span id="player-cash" class="money-amount">$0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Confirmation Modal -->
+    <div id="confirm-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirm Purchase</h2>
+            </div>
+            <div class="modal-body">
+                <div class="pet-preview">
+                    <img id="modal-pet-image" src="" alt="Pet">
+                </div>
+                <p class="modal-text">
+                    Would ye like to purchase<br>
+                    <strong id="modal-pet-name"></strong><br>
+                    for <span id="modal-pet-price" class="price-gold"></span>?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirm-yes" class="modal-btn confirm">
+                    <span>🤝 Purchase</span>
+                </button>
+                <button id="confirm-no" class="modal-btn cancel">
+                    <span>✗ Cancel</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pet Status Panel -->
+    <div id="pet-status-container" class="hidden">
+        <div class="status-panel">
+            <div class="status-header">
+                <span class="pet-icon">🐾</span>
+                <h2 id="status-pet-name">Pet Name</h2>
+                <button id="status-close-btn" class="status-close">✕</button>
+            </div>
+            <div class="status-body">
+                <!-- Lifespan -->
+                <div class="stat-row">
+                    <div class="stat-label">
+                        <span class="stat-icon">⏳</span>
+                        <span>Lifespan</span>
+                    </div>
+                    <div class="stat-bar-container">
+                        <div id="lifespan-bar" class="stat-bar lifespan-bar" style="width: 100%"></div>
+                    </div>
+                    <span id="lifespan-text" class="stat-value">60 days</span>
+                </div>
+                <!-- Health -->
+                <div class="stat-row">
+                    <div class="stat-label">
+                        <span class="stat-icon">❤️</span>
+                        <span>Health</span>
+                    </div>
+                    <div class="stat-bar-container">
+                        <div id="health-bar" class="stat-bar health-bar" style="width: 100%"></div>
+                    </div>
+                    <span id="health-text" class="stat-value">100%</span>
+                </div>
+                <!-- Hunger -->
+                <div class="stat-row">
+                    <div class="stat-label">
+                        <span class="stat-icon">🍖</span>
+                        <span>Hunger</span>
+                    </div>
+                    <div class="stat-bar-container">
+                        <div id="hunger-bar" class="stat-bar hunger-bar" style="width: 100%"></div>
+                    </div>
+                    <span id="hunger-text" class="stat-value">100%</span>
+                </div>
+            </div>
+            <div class="status-footer">
+                <p id="status-tip" class="status-tip">Keep your companion well fed!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pet Feed Menu -->
+    <div id="pet-feed-container" class="hidden">
+        <div class="feed-panel">
+            <div class="feed-header">
+                <span class="pet-icon">🍖</span>
+                <h2 id="feed-pet-name">Feed Pet</h2>
+                <button id="feed-close-btn" class="status-close">✕</button>
+            </div>
+            <div class="feed-body">
+                <p class="feed-subtitle">Select food to feed your companion:</p>
+                <div id="food-items-list" class="food-items-list">
+                    <!-- Food items will be dynamically inserted here -->
+                </div>
+                <p id="no-food-msg" class="no-food-msg hidden">You don't have any food!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Progress Bar -->
+    <div id="progress-container" class="hidden">
+        <div class="progress-box">
+            <div class="progress-label" id="progress-label">Feeding...</div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
