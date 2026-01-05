@@ -114,7 +114,7 @@ function closeShop() {
     hideShop();
 
     // Send close message to client
-    fetch('https://${RESOURCE_NAME}/closeShop', {
+    fetch('https://rsg-pets/closeShop', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({})
@@ -226,7 +226,7 @@ function confirmPurchase() {
     }
 
     // Send purchase request to client
-    fetch('https://${RESOURCE_NAME}/purchasePet', {
+    fetch('https://rsg-pets/purchasePet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -305,7 +305,7 @@ function showPetStatus(data) {
 function closePetStatus() {
     statusContainer.classList.add('hidden');
 
-    fetch('https://${RESOURCE_NAME}/closeStatus', {
+    fetch('https://rsg-pets/closeStatus', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({})
@@ -365,7 +365,7 @@ function showFeedMenu(data) {
 function selectFood(itemName, itemLabel) {
     feedContainer.classList.add('hidden');
 
-    fetch('https://${RESOURCE_NAME}/selectFood', {
+    fetch('https://rsg-pets/selectFood', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ itemName: itemName, itemLabel: itemLabel })
@@ -375,7 +375,7 @@ function selectFood(itemName, itemLabel) {
 function closeFeedMenu() {
     feedContainer.classList.add('hidden');
 
-    fetch('https://${RESOURCE_NAME}/closeFeedMenu', {
+    fetch('https://rsg-pets/closeFeedMenu', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({})
@@ -413,7 +413,7 @@ function showProgressBar(data) {
     progressInterval = setTimeout(() => {
         progressContainer.classList.add('hidden');
         progressFill.style.width = '0%';
-        fetch('https://${RESOURCE_NAME}/progressBarComplete', {
+        fetch('https://rsg-pets/progressBarComplete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({})
