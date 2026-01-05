@@ -433,6 +433,12 @@ function newCat(model, name, petItemName) -- Added petItemName parameter
             SetPedAsGroupMember(object.id, GetPedGroupIndex(PlayerPedId()))
             SetPedPromptName(object.id, object.name)
             SetBlockingOfNonTemporaryEvents(object.id, true)
+
+            -- Fix for Black Panther skin
+            if object.model == 'A_C_Panther_01' then
+                -- Set to variation 1 (Black) instead of default (Florida/Red)
+                SetPedOutfitPreset(object.id, 1, 0)
+            end
             
             object.pos = GetEntityCoords(object.id)
             object.spawned = true

@@ -4,6 +4,7 @@
  */
 
 // State
+const RESOURCE_NAME = GetParentResourceName();
 let currentCategory = 'dog';
 let pets = [];
 let selectedPet = null;
@@ -113,7 +114,7 @@ function closeShop() {
     hideShop();
 
     // Send close message to client
-    fetch('https://rsg-pets/closeShop', {
+    fetch('https://${RESOURCE_NAME}/closeShop', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({})
@@ -225,7 +226,7 @@ function confirmPurchase() {
     }
 
     // Send purchase request to client
-    fetch('https://rsg-pets/purchasePet', {
+    fetch('https://${RESOURCE_NAME}/purchasePet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -304,7 +305,7 @@ function showPetStatus(data) {
 function closePetStatus() {
     statusContainer.classList.add('hidden');
 
-    fetch('https://rsg-pets/closeStatus', {
+    fetch('https://${RESOURCE_NAME}/closeStatus', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({})
@@ -364,7 +365,7 @@ function showFeedMenu(data) {
 function selectFood(itemName, itemLabel) {
     feedContainer.classList.add('hidden');
 
-    fetch('https://rsg-pets/selectFood', {
+    fetch('https://${RESOURCE_NAME}/selectFood', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ itemName: itemName, itemLabel: itemLabel })
@@ -374,7 +375,7 @@ function selectFood(itemName, itemLabel) {
 function closeFeedMenu() {
     feedContainer.classList.add('hidden');
 
-    fetch('https://rsg-pets/closeFeedMenu', {
+    fetch('https://${RESOURCE_NAME}/closeFeedMenu', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({})
@@ -412,7 +413,7 @@ function showProgressBar(data) {
     progressInterval = setTimeout(() => {
         progressContainer.classList.add('hidden');
         progressFill.style.width = '0%';
-        fetch('https://rsg-pets/progressBarComplete', {
+        fetch('https://${RESOURCE_NAME}/progressBarComplete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({})

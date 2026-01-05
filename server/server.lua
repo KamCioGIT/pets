@@ -87,13 +87,14 @@ AddEventHandler('rsg-pets:server:purchasePet', function(petName, price)
     end
     
     -- Check if player already owns a pet (only one pet allowed)
-    for existingPetName, _ in pairs(Config.Pets) do
-        local hasItem = Player.Functions.GetItemByName(existingPetName)
-        if hasItem then
-            TriggerClientEvent('rsg-pets:client:purchaseResult', src, false, 'You already own a pet! Only one pet allowed at a time.')
-            return
-        end
-    end
+    -- Disabled: User wants to allow multiple pets in inventory
+    -- for existingPetName, _ in pairs(Config.Pets) do
+    --     local hasItem = Player.Functions.GetItemByName(existingPetName)
+    --     if hasItem then
+    --         TriggerClientEvent('rsg-pets:client:purchaseResult', src, false, 'You already own a pet! Only one pet allowed at a time.')
+    --         return
+    --     end
+    -- end
     
     -- Check player has enough money
     local playerCash = Player.PlayerData.money.cash or 0

@@ -240,6 +240,21 @@ Config.Pets = {
         description = 'Common but lovable barn cat.',
         image = 'animal_cat_tabby.png'
     },
+    
+    -- LOOTCRATE PETS
+    ['pet_dog_hound'] = { name = 'pet_dog_hound', label = 'Hound Dog', model = 'A_C_DogHound_01', type = 'dog', price = 0, description = 'A loyal hound.', image = 'pet_dog_hound.png' },
+    ['pet_dog_collie'] = { name = 'pet_dog_collie', label = 'Collie', model = 'A_C_DogCollie_01', type = 'dog', price = 0, description = 'Agile herder.', image = 'pet_dog_collie.png' },
+    ['pet_dog_retriever'] = { name = 'pet_dog_retriever', label = 'Chesapeake Retriever', model = 'A_C_DogChesBayRetriever_01', type = 'dog', price = 0, description = 'Excellent swimmer.', image = 'pet_dog_retriever.png' },
+    ['pet_dog_husky'] = { name = 'pet_dog_husky', label = 'Husky', model = 'A_C_DogHusky_01', type = 'dog', price = 0, description = 'Strong sled dog.', image = 'pet_dog_husky.png' },
+    ['pet_dog_foxhound'] = { name = 'pet_dog_foxhound', label = 'American Foxhound', model = 'A_C_DogAmericanFoxhound_01', type = 'dog', price = 0, description = 'Keen tracker.', image = 'pet_dog_foxhound.png' },
+    ['pet_dog_shepherd'] = { name = 'pet_dog_shepherd', label = 'Australian Shepherd', model = 'A_C_DogAustralianSheperd_01', type = 'dog', price = 0, description = 'Intelligent herder.', image = 'pet_dog_shepherd.png' },
+    ['pet_dog_poodle'] = { name = 'pet_dog_poodle', label = 'Standard Poodle', model = 'A_C_DogPoodle_01', type = 'dog', price = 0, description = 'Elegant breed.', image = 'pet_dog_poodle.png' },
+    ['pet_dog_coonhound'] = { name = 'pet_dog_coonhound', label = 'Bluetick Coonhound', model = 'A_C_DogBluetickCoonhound_01', type = 'dog', price = 0, description = 'Expert tracker.', image = 'pet_dog_coonhound.png' },
+    ['pet_dog_labrador'] = { name = 'pet_dog_labrador', label = 'Labrador', model = 'A_C_DogLab_01', type = 'dog', price = 0, description = 'Friendly companion.', image = 'pet_dog_labrador.png' },
+    ['pet_cat_siamese'] = { name = 'pet_cat_siamese', label = 'Siamese Cat', model = 'A_C_Cat_01', type = 'cat', price = 0, description = 'A rare cat breed.', image = 'pet_cat_siamese.png' },
+    ['pet_wolf_timber'] = { name = 'pet_wolf_timber', label = 'Timber Wolf', model = 'A_C_Wolf_Medium', type = 'dog', price = 0, description = 'A tamed wild wolf.', image = 'pet_wolf_timber.png' },
+    ['pet_panther'] = { name = 'pet_panther', label = 'Black Panther', model = 'A_C_Panther_01', type = 'cat', price = 0, description = 'A dangerous predator.', image = 'pet_panther.png' },
+    ['pet_lion'] = { name = 'pet_lion', label = 'Mountain Lion', model = 'A_C_Cougar_01', type = 'cat', price = 0, description = 'The king of the mountain.', image = 'pet_lion.png' },
 }
 
 -------------------------------------------------
