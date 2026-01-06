@@ -12,7 +12,8 @@ ui_page 'html/index.html'
 files {
     'html/index.html',
     'html/style.css',
-    'html/script.js'
+    'html/script.js',
+    'html/img/*.png'
 }
 
 -- Shared scripts (loaded first)

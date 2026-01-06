@@ -1,84 +1,99 @@
-# rsg-pets by devchacha
+# RSG-Pets: 
 
-A fully-featured pet companion system for RSG-Core with an immersive Wild West themed UI, health system, and persistent naming.
+A comprehensive and interactive pet system for RedM (RSG Framework), allowing players to buy, own, name, and care for a variety of domestic dogs and cats.
 
-## Features
+## 🌟 Features
 
-### 🎨 Wild West Themed UI
-- Authentic 1899-style shop interface
-- Custom "Wanted Poster" pet cards
-- **NEW:** Interactive Pet Status Menu (Health, Hunger, Lifespan)
-- **NEW:** Immersive Feeding Menu with custom progress bars
+*   **Inventory Integration**: Pets are items in your inventory! You can own multiple pets. Use the item to summon your companion.
+*   **Pet Shop UI**: Beautiful, interactive NUI for purchasing pets with custom icons.
+*   **Persistent Naming**: Name your pet! The name is saved to the item itself, so your "Rufus" stays "Rufus" forever.
+*   **Needs System**: Pets get hungry and lose health. Feed them to keep them happy.
+*   **Interactions (Third-Eye)**:
+    *   ❤️ **Pet**: Show some love.
+    *   ✋ **Stay**: Tell your pet to wait at a location.
+    *   🚶 **Follow**: Call your pet to your side.
+    *   🛏️ **Rest**: Have your pet lay down/sleep.
+    *   📊 **Status**: Check health, hunger, and age.
+    *   🍗 **Feed**: Open a menu to feed your pet specific food items.
+    *   🖊️ **Rename**: Give your friend a unique name.
+    *   🚪 **Flee**: Dismiss your pet (despawn) back to the "ether" (it remains in your inventory).
+*   **Consistent Appearance**: Pets spawn with fixed coat colors—no more random changing identities!
+*   **Smart AI**: Pets follow you, relax when you stop, and can be whistled for if they get lost.
 
-### 🐕 & 🐈 Companions
-- 11 Dog Breeds (Shepherds, Huskies, Retrievers, etc.)
-- Cats (Tabby)
-- **Persistence:** Pet names are saved specifically to your pet item!
-- **Lifespan:** Pets age and have a configured lifespan (default 60 days)
+## 📋 Dependencies
 
-### 🏪 Interactive Shop
-- Located at Valentine (customizable)
-- Animated Shopkeeper NPC
-- Use Third-Eye to interact
+*   `rsg-core`
+*   `rsg-inventory`
+*   `rsg-target`
+*   `ox_lib`
 
-### 🎮 Advanced Behaviors
-- **Needs System:** Hunger decays over time; affects health.
-- **Commands:** Follow, Stay, Rest, Sleep.
-- **Feeding:** Feed your pet various meats and breads to restore stats.
-- **Animations:** Petting, eating, and sleeping animations.
+## 🛠️ Installation
 
-## Dependencies
-- [rsg-core]
-- [rsg-inventory]
-- [ox_lib]
+1.  **Download & Install**:
+    *   Place `rsg-pets` into your `resources` directory.
+    *   Add `ensure rsg-pets` to your `server.cfg`.
 
-## Installation
+2.  **Add Items**:
+    *   Add the following items to your `rsg-core/shared/items.lua` (or database):
 
-### 1. Add Resource
-Copy the `rsg-pets` folder to your server's `resources` directory.
+    ```lua
+    -- Pet Items
+    ['foxhound'] = {['name'] = 'foxhound', ['label'] = 'American Foxhound', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_americanfoxhound.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'A loyal hound.'},
+    ['sheperd'] = {['name'] = 'sheperd', ['label'] = 'Australian Shepherd', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_australianshepherd.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'An intelligent herder.'},
+    ['coonhound'] = {['name'] = 'coonhound', ['label'] = 'Bluetick Coonhound', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_bluetickcoonhound.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Expert tracker.'},
+    ['catahoulacur'] = {['name'] = 'catahoulacur', ['label'] = 'Catahoula Cur', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_catahoularcur.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Versatile working dog.'},
+    ['bayretriever'] = {['name'] = 'bayretriever', ['label'] = 'Chesapeake Retriever', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_chesbayretriever.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Excellent swimmer.'},
+    ['collie'] = {['name'] = 'collie', ['label'] = 'Border Collie', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_collie.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Smartest dog breed.'},
+    ['hound'] = {['name'] = 'hound', ['label'] = 'Hound Dog', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_hound.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Classic hunter.'},
+    ['husky'] = {['name'] = 'husky', ['label'] = 'Husky', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_husky.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Strong sled dog.'},
+    ['lab'] = {['name'] = 'lab', ['label'] = 'Labrador', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_lab.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Friendly companion.'},
+    ['poodle'] = {['name'] = 'poodle', ['label'] = 'Poodle', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_poodle.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Elegant breed.'},
+    ['street'] = {['name'] = 'street', ['label'] = 'Street Mutt', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_street.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Tough survivor.'},
+    ['rufus'] = {['name'] = 'rufus', ['label'] = 'Rufus', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_rufus.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Reliable farm dog.'},
+    ['lionpoodle'] = {['name'] = 'lionpoodle', ['label'] = 'Lion Poodle', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_dog_lionpoodle.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Fancy groomed poodle.'},
+    ['tabbycat'] = {['name'] = 'tabbycat', ['label'] = 'Tabby Cat', ['weight'] = 0, ['type'] = 'item', ['image'] = 'animal_cat_tabby.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Lovable barn cat.'},
+    
+    -- Lootcrate/Special Versions
+    ['pet_dog_hound'] = {['name'] = 'pet_dog_hound', ['label'] = 'Hound Dog', ['weight'] = 0, ['type'] = 'item', ['image'] = 'pet_dog_hound.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'A loyal hound.'},
+    ['pet_dog_collie'] = {['name'] = 'pet_dog_collie', ['label'] = 'Collie', ['weight'] = 0, ['type'] = 'item', ['image'] = 'pet_dog_collie.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Agile herder.'},
+    ['pet_dog_retriever'] = {['name'] = 'pet_dog_retriever', ['label'] = 'Chesapeake Retriever', ['weight'] = 0, ['type'] = 'item', ['image'] = 'pet_dog_retriever.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Excellent swimmer.'},
+    ['pet_dog_husky'] = {['name'] = 'pet_dog_husky', ['label'] = 'Husky', ['weight'] = 0, ['type'] = 'item', ['image'] = 'pet_dog_husky.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Strong sled dog.'},
+    ['pet_dog_foxhound'] = {['name'] = 'pet_dog_foxhound', ['label'] = 'American Foxhound', ['weight'] = 0, ['type'] = 'item', ['image'] = 'pet_dog_foxhound.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Keen tracker.'},
+    ['pet_dog_shepherd'] = {['name'] = 'pet_dog_shepherd', ['label'] = 'Australian Shepherd', ['weight'] = 0, ['type'] = 'item', ['image'] = 'pet_dog_shepherd.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Intelligent herder.'},
+    ['pet_dog_poodle'] = {['name'] = 'pet_dog_poodle', ['label'] = 'Standard Poodle', ['weight'] = 0, ['type'] = 'item', ['image'] = 'pet_dog_poodle.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Elegant breed.'},
+    ['pet_dog_coonhound'] = {['name'] = 'pet_dog_coonhound', ['label'] = 'Bluetick Coonhound', ['weight'] = 0, ['type'] = 'item', ['image'] = 'pet_dog_coonhound.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Expert tracker.'},
+    ['pet_dog_labrador'] = {['name'] = 'pet_dog_labrador', ['label'] = 'Labrador', ['weight'] = 0, ['type'] = 'item', ['image'] = 'pet_dog_labrador.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Friendly companion.'},
+    ['pet_cat_siamese'] = {['name'] = 'pet_cat_siamese', ['label'] = 'Siamese Cat', ['weight'] = 0, ['type'] = 'item', ['image'] = 'pet_cat_siamese.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'A rare cat breed.'},
+    ```
 
-### 2. Add Items
-Add pet items and food items to your `rsg-core/shared/items.lua`.
-*See `installation/shared_items.lua` for the full list of pet items.*
+3.  **Images**:
+    *   Ensure all pet images (found in `html/img/`) are also copied to `rsg-inventory/html/images/`.
 
-**Required Food Items:**
-- `bread`, `meat`, `venison`, `fish`, `pork`, `chicken`, `stew`
+## ⚙️ Configuration
 
-### 3. Start Resource
-Add to your `server.cfg`:
-```cfg
-ensure rsg-pets
-```
+Check `config.lua` to customize:
+*   **Pets**: Define breeds, prices, models, descriptions, and **skins** (set `skin = 0` to fix colors).
+*   **Pet Shop Locations**: Move the NPC and shop interaction zone.
+*   **Pet Behavior**: Adjust follow distance, wandering radius, etc.
+*   **Pet Food**: Define what items can be fed to pets and how much they restore.
 
-## Configuration
-Edit `config.lua` to customize:
-- **Pet Food:** Define which items can be fed and how much they restore.
-- **Lifespan:** Set how long pets live (in real days).
-- **Hunger Rate:** Adjust how fast hunger/health tick down.
-- **Shop Location:** Move the generic store NPC anywhere.
+## 🎮 Usage
 
-## Usage
+*   **Buying**: Visit the Pet Shop (blip on map) and talk to the NPC.
+*   **Summoning**: Use the pet item in your inventory.
+*   **Dismissing**: Target your pet (Left Alt) and select **"Flee"**.
+*   **Interacting**: Target your pet to see all options (Feed, Rename, Stay, etc.).
 
-### 🛒 Buying a Pet
-1. Go to the Pet Shop (Blip on map).
-2. Use **Third-Eye (Alt)** on the Storekeeper.
-3. Select "Open Pet Shop".
-4. Purchase your companion.
+## 📝 Commands
 
-### 🐕 Interacting with Pets
-Use your pet item to spawn/dismiss.
-**Third-Eye (Alt)** on your pet to access:
-- **❤️ Pet:** Show affection.
-- **🍖 Feed:** Open food menu.
-- **📊 Check Status:** View health/hunger bars.
-- **✏️ Rename:** Give your pet a unique name (Saved permanently!).
-- **✋ Commands:** Stay, Follow, Rest.
+*   `/petwhistle` - Call your active pet to your current location (if they are spawned).
+*   `/petdismiss` - Emergency command to despawn your active pet.
 
-## Commands
-| Command | Description |
-|---------|-------------|
-| `/petwhistle` | Call your pet to you |
-| `/petdismiss` | Send pet back to inventory |
+## 🐛 Troubleshooting
 
-## Credits
-- Script created by **devchacha**
+*   **Floating NPC**: Ensure `SpawnShopNPC` has valid ground snapping logic (already fixed in `client.lua`).
+*   **Random Colors**: Ensure `skin = 0` is set in `config.lua` for each pet (already fixed).
+*   **Missing Images**: Ensure images are in BOTH `rsg-pets/html/img/` AND `rsg-inventory/html/images/`.
+
+---
+*Created for RedM RSG Framework*

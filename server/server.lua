@@ -13,7 +13,7 @@ Citizen.CreateThread(function()
             if not Player then return end
             
             -- Trigger client event with pet name and item info
-            TriggerClientEvent('rsg-pets:client:callPet', source, petName, item.info)
+            TriggerClientEvent('rsg-pets:client:callPet', source, petName, item.info, item.slot)
         end)
         
         if Config.Debug then
@@ -26,22 +26,33 @@ end)
 
 
 RegisterNetEvent('rsg-pets:server:updatePetName')
-AddEventHandler('rsg-pets:server:updatePetName', function(petItemName, newName)
+AddEventHandler('rsg-pets:server:updatePetName', function(petItemName, newName, slot)
     local src = source
     local Player = RSGCore.Functions.GetPlayer(src)
     
     if not Player then return end
     
-    -- Find the pet item in inventory
-    local item = Player.Functions.GetItemByName(petItemName)
+    -- Try to find item by slot first (more accurate), then by name
+    local item = nil
+    if slot then
+        item = Player.PlayerData.items[slot]
+    end
+    
+    if not item or item.name ~= petItemName then
+        item = Player.Functions.GetItemByName(petItemName)
+    end
     
     if item then
-        -- Update item metadata using rsg-inventory export
-        -- This saves the name to the specific item instance
-        exports['rsg-inventory']:SetItemData(src, item.name, 'petName', newName)
+        -- Update item info directly for persistence
+        item.info = item.info or {}
+        item.info.petName = newName
+        
+        -- Save back to player data
+        Player.PlayerData.items[item.slot] = item
+        Player.Functions.SetPlayerData('items', Player.PlayerData.items)
         
         if Config.Debug then
-            -- print('[Pet System] Updated pet name for ' .. src .. ': ' .. newName)
+            print('[Pet System] Updated pet name for ' .. src .. ': ' .. newName .. ' in slot ' .. item.slot)
         end
     end
 end)
@@ -100,7 +111,7 @@ AddEventHandler('rsg-pets:server:purchasePet', function(petName, price)
     local playerCash = Player.PlayerData.money.cash or 0
     
     if playerCash < price then
-        TriggerClientEvent('rsg-pets:client:purchaseResult', src, false, _L('purchase_failed'))
+        TriggerClientEvent('rsg-pets:client:purchaseResult', src, false, 'Not enough money!')
         return
     end
     
@@ -115,7 +126,7 @@ AddEventHandler('rsg-pets:server:purchasePet', function(petName, price)
     
     if added then
         TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[petName], 'add')
-        TriggerClientEvent('rsg-pets:client:purchaseResult', src, true, string.format(_L('purchase_success'), petConfig.label, price))
+        TriggerClientEvent('rsg-pets:client:purchaseResult', src, true, string.format('You purchased a %s for $%s', petConfig.label, price))
         
         -- Update money display
         local newCash = Player.PlayerData.money.cash or 0

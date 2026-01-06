@@ -6,9 +6,11 @@
 
 local RSGCore = exports['rsg-core']:GetCoreObject()
 
-function newDoggo(model, name, petItemName)
+function newDoggo(model, name, petItemName, skin, slot)
     local object = {}
     object.petItemName = petItemName -- Store item name for persistence
+    object.skin = skin -- Store default skin
+    object.slot = slot -- Store slot
     object.spawned = false
     object.model = model
     object.pos = false
@@ -60,6 +62,14 @@ function newDoggo(model, name, petItemName)
             
             while not DoesEntityExist(object.id) do
                 Wait(300)
+            end
+
+            -- Apply Skin/Variation if defined
+            if object.skin then
+                -- _SET_PED_TEXTURE_VARIATION
+                Citizen.InvokeNative(0xA6D8D713, object.id, object.skin)
+                -- Also try SetPedOutfitPreset just in case
+                Citizen.InvokeNative(0x77F5497E2CE9709E, object.id, object.skin, 0)
             end
             
             Citizen.InvokeNative(0x283978A15512B2FE, object.id, true)
@@ -206,7 +216,7 @@ function newDoggo(model, name, petItemName)
                                 
                                 -- Trigger server event to save name if we have the item name
                                 if object.petItemName then
-                                    TriggerServerEvent('rsg-pets:server:updatePetName', object.petItemName, newName)
+                                    TriggerServerEvent('rsg-pets:server:updatePetName', object.petItemName, newName, object.slot)
                                 end
                                 
                                 lib.notify({ title = 'Pets', description = 'Renamed pet to ' .. newName, type = 'success', duration = 3000 })
@@ -216,6 +226,14 @@ function newDoggo(model, name, petItemName)
                         end,
                         icon = "fas fa-pen",
                         label = "Rename",
+                    },
+                    {
+                        type = "client",
+                        action = function()
+                            TriggerEvent('rsg-pets:client:dismissPet')
+                        end,
+                        icon = "fas fa-sign-out-alt",
+                        label = "Flee",
                     },
                 },
                 distance = 3.0,

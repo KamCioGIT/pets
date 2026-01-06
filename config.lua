@@ -1,6 +1,5 @@
 --[[
-    RSG-Pets Enhanced - Wild West Edition
-    Configuration File
+  
 ]]
 
 Config = {}
@@ -100,161 +99,156 @@ Config.Pets = {
         label = 'American Foxhound',
         model = 'A_C_DogAmericanFoxhound_01',
         type = 'dog',
-        price = 250,
+        price = 650,
         description = 'A loyal hound with a keen nose for tracking.',
-        image = 'animal_dog_americanfoxhound.png'
+        image = 'animal_dog_americanfoxhound.png',
+        skin = 0
     },
     ['sheperd'] = {
         name = 'sheperd',
         label = 'Australian Shepherd',
         model = 'A_C_DogAustralianSheperd_01',
         type = 'dog',
-        price = 275,
+        price = 900,
         description = 'An intelligent herding dog, quick and agile.',
-        image = 'animal_dog_australianshepherd.png'
+        image = 'animal_dog_australianshepherd.png',
+        skin = 0
     },
     ['coonhound'] = {
         name = 'coonhound',
         label = 'Bluetick Coonhound',
         model = 'A_C_DogBluetickCoonhound_01',
         type = 'dog',
-        price = 260,
+        price = 700,
         description = 'Expert tracker with a distinctive howl.',
-        image = 'animal_dog_bluetickcoonhound.png'
+        image = 'animal_dog_bluetickcoonhound.png',
+        skin = 0
     },
     ['catahoulacur'] = {
         name = 'catahoulacur',
         label = 'Catahoula Cur',
         model = 'A_C_DogCatahoulaCur_01',
         type = 'dog',
-        price = 280,
+        price = 950,
         description = 'Versatile working dog from Louisiana.',
-        image = 'animal_dog_catahoularcur.png'
+        image = 'animal_dog_catahoularcur.png',
+        skin = 0
     },
     ['bayretriever'] = {
         name = 'bayretriever',
         label = 'Chesapeake Bay Retriever',
         model = 'A_C_DogChesBayRetriever_01',
         type = 'dog',
-        price = 300,
+        price = 1100,
         description = 'Excellent swimmer and retriever.',
-        image = 'animal_dog_chesbayretriever.png'
+        image = 'animal_dog_chesbayretriever.png',
+        skin = 0
     },
     ['collie'] = {
         name = 'collie',
         label = 'Border Collie',
         model = 'A_C_DogCollie_01',
         type = 'dog',
-        price = 290,
+        price = 1000,
         description = 'The smartest of all dog breeds.',
-        image = 'animal_dog_collie.png'
+        image = 'animal_dog_collie.png',
+        skin = 0
     },
     ['hound'] = {
         name = 'hound',
         label = 'Hound Dog',
         model = 'A_C_DogHound_01',
         type = 'dog',
-        price = 220,
+        price = 600,
         description = 'Classic hunting companion.',
-        image = 'animal_dog_hound.png'
+        image = 'animal_dog_hound.png',
+        skin = 0
     },
     ['husky'] = {
         name = 'husky',
         label = 'Siberian Husky',
         model = 'A_C_DogHusky_01',
         type = 'dog',
-        price = 350,
+        price = 1400,
         description = 'Strong and tireless sled dog.',
-        image = 'animal_dog_husky.png'
+        image = 'animal_dog_husky.png',
+        skin = 0
     },
     ['lab'] = {
         name = 'lab',
         label = 'Labrador Retriever',
         model = 'A_C_DogLab_01',
         type = 'dog',
-        price = 270,
+        price = 800,
         description = 'Friendly family companion.',
-        image = 'animal_dog_lab.png'
+        image = 'animal_dog_lab.png',
+        skin = 0
     },
     ['poodle'] = {
         name = 'poodle',
         label = 'Poodle',
         model = 'A_C_DogPoodle_01',
         type = 'dog',
-        price = 320,
+        price = 1200,
         description = 'Elegant and intelligent breed.',
-        image = 'animal_dog_poodle.png'
+        image = 'animal_dog_poodle.png',
+        skin = 0
     },
     ['street'] = {
         name = 'street',
         label = 'Street Mutt',
         model = 'A_C_DogStreet_01',
         type = 'dog',
-        price = 100,
+        price = 400,
         description = 'Tough survivor of the streets.',
-        image = 'animal_dog_street.png'
+        image = 'animal_dog_street.png',
+        skin = 0
     },
     ['rufus'] = {
         name = 'rufus',
         label = 'Rufus',
         model = 'A_C_DogRufus_01',
         type = 'dog',
-        price = 150,
+        price = 450,
         description = 'A reliable and sturdy farm dog.',
-        image = 'animal_dog_rufus.png'
+        image = 'animal_dog_rufus.png',
+        skin = 0
     },
     ['lionpoodle'] = {
         name = 'lionpoodle',
         label = 'Lion Poodle',
         model = 'A_C_DogLion_01',
         type = 'dog',
-        price = 200,
+        price = 1500,
         description = 'Fancy, groomed, and full of character.',
-        image = 'animal_dog_lionpoodle.png'
+        image = 'animal_dog_lionpoodle.png',
+        skin = 0
     },
-    ['fox'] = {
-        name = 'fox',
-        label = 'Red Fox',
-        model = 'A_C_Fox_01',
-        type = 'dog',
-        price = 250,
-        description = 'A clever wild fox taming the west.',
-        image = 'animal_fox.png'
-    },
-    ['raccoon'] = {
-        name = 'raccoon',
-        label = 'Raccoon',
-        model = 'A_C_Raccoon_01',
-        type = 'cat',
-        price = 125,
-        description = 'A mischievous trash bandit.',
-        image = 'animal_raccoon.png'
-    },
+    ['fox'] = nil, -- 
+    ['raccoon'] = nil, --
     -- CATS
     ['tabbycat'] = {
         name = 'tabbycat',
         label = 'Tabby Cat',
         model = 'A_C_Cat_01',
         type = 'cat',
-        price = 150,
+        price = 450,
         description = 'Common but lovable barn cat.',
-        image = 'animal_cat_tabby.png'
+        image = 'animal_cat_tabby.png',
+        skin = 0
     },
     
-    -- LOOTCRATE PETS
-    ['pet_dog_hound'] = { name = 'pet_dog_hound', label = 'Hound Dog', model = 'A_C_DogHound_01', type = 'dog', price = 0, description = 'A loyal hound.', image = 'pet_dog_hound.png' },
-    ['pet_dog_collie'] = { name = 'pet_dog_collie', label = 'Collie', model = 'A_C_DogCollie_01', type = 'dog', price = 0, description = 'Agile herder.', image = 'pet_dog_collie.png' },
-    ['pet_dog_retriever'] = { name = 'pet_dog_retriever', label = 'Chesapeake Retriever', model = 'A_C_DogChesBayRetriever_01', type = 'dog', price = 0, description = 'Excellent swimmer.', image = 'pet_dog_retriever.png' },
-    ['pet_dog_husky'] = { name = 'pet_dog_husky', label = 'Husky', model = 'A_C_DogHusky_01', type = 'dog', price = 0, description = 'Strong sled dog.', image = 'pet_dog_husky.png' },
-    ['pet_dog_foxhound'] = { name = 'pet_dog_foxhound', label = 'American Foxhound', model = 'A_C_DogAmericanFoxhound_01', type = 'dog', price = 0, description = 'Keen tracker.', image = 'pet_dog_foxhound.png' },
-    ['pet_dog_shepherd'] = { name = 'pet_dog_shepherd', label = 'Australian Shepherd', model = 'A_C_DogAustralianSheperd_01', type = 'dog', price = 0, description = 'Intelligent herder.', image = 'pet_dog_shepherd.png' },
-    ['pet_dog_poodle'] = { name = 'pet_dog_poodle', label = 'Standard Poodle', model = 'A_C_DogPoodle_01', type = 'dog', price = 0, description = 'Elegant breed.', image = 'pet_dog_poodle.png' },
-    ['pet_dog_coonhound'] = { name = 'pet_dog_coonhound', label = 'Bluetick Coonhound', model = 'A_C_DogBluetickCoonhound_01', type = 'dog', price = 0, description = 'Expert tracker.', image = 'pet_dog_coonhound.png' },
-    ['pet_dog_labrador'] = { name = 'pet_dog_labrador', label = 'Labrador', model = 'A_C_DogLab_01', type = 'dog', price = 0, description = 'Friendly companion.', image = 'pet_dog_labrador.png' },
-    ['pet_cat_siamese'] = { name = 'pet_cat_siamese', label = 'Siamese Cat', model = 'A_C_Cat_01', type = 'cat', price = 0, description = 'A rare cat breed.', image = 'pet_cat_siamese.png' },
-    ['pet_wolf_timber'] = { name = 'pet_wolf_timber', label = 'Timber Wolf', model = 'A_C_Wolf_Medium', type = 'dog', price = 0, description = 'A tamed wild wolf.', image = 'pet_wolf_timber.png' },
-    ['pet_panther'] = { name = 'pet_panther', label = 'Black Panther', model = 'A_C_Panther_01', type = 'cat', price = 0, description = 'A dangerous predator.', image = 'pet_panther.png' },
-    ['pet_lion'] = { name = 'pet_lion', label = 'Mountain Lion', model = 'A_C_Cougar_01', type = 'cat', price = 0, description = 'The king of the mountain.', image = 'pet_lion.png' },
+    -- LOOTCRATE PETS (Domestic Only)
+    ['pet_dog_hound'] = { name = 'pet_dog_hound', label = 'Hound Dog', model = 'A_C_DogHound_01', type = 'dog', price = 600, description = 'A loyal hound.', image = 'pet_dog_hound.png', skin = 0 },
+    ['pet_dog_collie'] = { name = 'pet_dog_collie', label = 'Collie', model = 'A_C_DogCollie_01', type = 'dog', price = 1000, description = 'Agile herder.', image = 'pet_dog_collie.png', skin = 0 },
+    ['pet_dog_retriever'] = { name = 'pet_dog_retriever', label = 'Chesapeake Retriever', model = 'A_C_DogChesBayRetriever_01', type = 'dog', price = 1100, description = 'Excellent swimmer.', image = 'pet_dog_retriever.png', skin = 0 },
+    ['pet_dog_husky'] = { name = 'pet_dog_husky', label = 'Husky', model = 'A_C_DogHusky_01', type = 'dog', price = 1400, description = 'Strong sled dog.', image = 'pet_dog_husky.png', skin = 0 },
+    ['pet_dog_foxhound'] = { name = 'pet_dog_foxhound', label = 'American Foxhound', model = 'A_C_DogAmericanFoxhound_01', type = 'dog', price = 650, description = 'Keen tracker.', image = 'pet_dog_foxhound.png', skin = 0 },
+    ['pet_dog_shepherd'] = { name = 'pet_dog_shepherd', label = 'Australian Shepherd', model = 'A_C_DogAustralianSheperd_01', type = 'dog', price = 900, description = 'Intelligent herder.', image = 'pet_dog_shepherd.png', skin = 0 },
+    ['pet_dog_poodle'] = { name = 'pet_dog_poodle', label = 'Standard Poodle', model = 'A_C_DogPoodle_01', type = 'dog', price = 1200, description = 'Elegant breed.', image = 'pet_dog_poodle.png', skin = 0 },
+    ['pet_dog_coonhound'] = { name = 'pet_dog_coonhound', label = 'Bluetick Coonhound', model = 'A_C_DogBluetickCoonhound_01', type = 'dog', price = 700, description = 'Expert tracker.', image = 'pet_dog_coonhound.png', skin = 0 },
+    ['pet_dog_labrador'] = { name = 'pet_dog_labrador', label = 'Labrador', model = 'A_C_DogLab_01', type = 'dog', price = 800, description = 'Friendly companion.', image = 'pet_dog_labrador.png', skin = 0 },
+    ['pet_cat_siamese'] = { name = 'pet_cat_siamese', label = 'Siamese Cat', model = 'A_C_Cat_01', type = 'cat', price = 1300, description = 'A rare cat breed.', image = 'pet_cat_siamese.png', skin = 0 },
 }
 
 -------------------------------------------------
@@ -265,7 +259,7 @@ Config.PetShopLocations = {
     {
         name = 'Pet Shop',
         shopname = 'main-pets',
-        coords = vector3(-291.84, 682.81, 113.61),
+        coords = vector3(-330.7, 738.4, 117.2),
         heading = 180.0,
         showblip = true,
         npcModel = 'u_m_m_valgenstoreowner_01'

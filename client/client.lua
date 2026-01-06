@@ -56,12 +56,13 @@ function SpawnShopNPC(shop)
     end
     
     -- Request collision and find ground Z
+    -- Request collision and find ground Z
     RequestCollisionAtCoord(shop.coords.x, shop.coords.y, shop.coords.z)
     local groundZ = shop.coords.z
     local hasGround = false
     local attempts = 0
     
-    while not hasGround and attempts < 20 do
+    while not hasGround and attempts < 50 do
         Wait(100)
         local found, z = GetGroundZFor_3dCoord(shop.coords.x, shop.coords.y, shop.coords.z + 50.0, false)
         if found then
@@ -78,7 +79,16 @@ function SpawnShopNPC(shop)
     Citizen.InvokeNative(0x283978A15512B2FE, npc, true)
     SetEntityInvincible(npc, true)
     SetBlockingOfNonTemporaryEvents(npc, true)
-    PlaceObjectOnGroundProperly(npc)
+    
+    -- Snap to ground
+    if hasGround then
+        SetEntityCoords(npc, shop.coords.x, shop.coords.y, groundZ, false, false, false, true)
+    else
+        PlaceObjectOnGroundProperly(npc)
+    end
+    
+    -- Wait a bit before freezing to ensure it settles
+    Wait(1000)
     FreezeEntityPosition(npc, true)
     
     -- Add third-eye interaction to NPC
@@ -213,7 +223,7 @@ end)
 
 -- Universal pet call event
 RegisterNetEvent('rsg-pets:client:callPet')
-AddEventHandler('rsg-pets:client:callPet', function(petName, itemInfo)
+AddEventHandler('rsg-pets:client:callPet', function(petName, itemInfo, slot)
     local petConfig = Config.Pets[petName]
     
     if not petConfig then
@@ -236,13 +246,13 @@ AddEventHandler('rsg-pets:client:callPet', function(petName, itemInfo)
         end
         petOut = false
         currentPet = nil
-        Notify(_L('pet_dismissed'), 'success')
+        Notify('Pet dismissed back to inventory', 'success')
     else
         -- Spawn new pet
         if petConfig.type == 'dog' then
-            currentPet = newDoggo(petConfig.model, displayName, petName) -- Pass petName (item name) for persistence
+            currentPet = newDoggo(petConfig.model, displayName, petName, petConfig.skin, slot) 
         elseif petConfig.type == 'cat' then
-            currentPet = newCat(petConfig.model, displayName, petName) -- Pass petName (item name) for persistence
+            currentPet = newCat(petConfig.model, displayName, petName, petConfig.skin, slot) 
         end
         
         petOut = true
@@ -252,7 +262,7 @@ AddEventHandler('rsg-pets:client:callPet', function(petName, itemInfo)
         end
         
         Wait(Config.WhistleWait)
-        Notify(string.format(_L('pet_called'), petConfig.label), 'success')
+        Notify(string.format('You called your %s', petConfig.label), 'success')
     end
 end)
 
@@ -296,7 +306,7 @@ RegisterCommand('petdismiss', function()
         currentPet.delete()
         petOut = false
         currentPet = nil
-        Notify(_L('pet_dismissed'), 'success')
+        Notify(Lang:t('info.pet_dismissed') or 'Pet dismissed back to inventory', 'success')
     end
 end, false)
 
@@ -384,9 +394,11 @@ AddEventHandler('rsg-pets:client:feedPet', function(itemName, itemLabel)
 end)
 
 
-function newCat(model, name, petItemName) -- Added petItemName parameter
+function newCat(model, name, petItemName, skin, slot) -- Added petItemName parameter
     local object = {}
-    object.petItemName = petItemName -- Store item name for persistence
+    object.petItemName = petItemName 
+    object.skin = skin
+    object.slot = slot -- Store slot
     object.spawned = false
     object.model = model
     object.pos = false
@@ -427,6 +439,14 @@ function newCat(model, name, petItemName) -- Added petItemName parameter
             
             while not DoesEntityExist(object.id) do
                 Wait(300)
+            end
+
+            -- Apply Skin/Variation if defined
+            if object.skin then
+                -- _SET_PED_TEXTURE_VARIATION
+                Citizen.InvokeNative(0xA6D8D713, object.id, object.skin)
+                -- Also try SetPedOutfitPreset just in case
+                Citizen.InvokeNative(0x77F5497E2CE9709E, object.id, object.skin, 0)
             end
             
             Citizen.InvokeNative(0x283978A15512B2FE, object.id, true)
@@ -574,7 +594,7 @@ function newCat(model, name, petItemName) -- Added petItemName parameter
                                 
                                 -- Trigger server event to save name if we have the item name
                                 if object.petItemName then
-                                    TriggerServerEvent('rsg-pets:server:updatePetName', object.petItemName, newName)
+                                    TriggerServerEvent('rsg-pets:server:updatePetName', object.petItemName, newName, object.slot)
                                 end
                                 
                                 lib.notify({ title = 'Pets', description = 'Renamed pet to ' .. newName, type = 'success', duration = 3000 })
@@ -584,6 +604,14 @@ function newCat(model, name, petItemName) -- Added petItemName parameter
                         end,
                         icon = "fas fa-pen",
                         label = "Rename",
+                    },
+                    {
+                        type = "client",
+                        action = function()
+                            TriggerEvent('rsg-pets:client:dismissPet')
+                        end,
+                        icon = "fas fa-sign-out-alt",
+                        label = "Flee",
                     },
                 },
                 distance = 3.0,
@@ -634,6 +662,17 @@ function newCat(model, name, petItemName) -- Added petItemName parameter
 
     return object
 end
+
+-- New Event for Dismissal
+RegisterNetEvent('rsg-pets:client:dismissPet')
+AddEventHandler('rsg-pets:client:dismissPet', function()
+    if currentPet then
+        currentPet.delete()
+        petOut = false
+        currentPet = nil
+        Notify('Pet dismissed back to inventory', 'success')
+    end
+end)
 
 
 AddEventHandler('onResourceStop', function(resourceName)

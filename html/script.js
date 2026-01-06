@@ -169,7 +169,7 @@ function createPetCard(pet) {
     card.className = 'pet-card';
     card.innerHTML = `
         <div class="pet-image-container">
-            <img class="pet-image" src="nui://rsg-inventory/html/images/${pet.image}" alt="${pet.label}" 
+            <img class="pet-image" src="./img/${pet.image}" alt="${pet.label}" 
                  onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23e8d4a8%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%238b4513%22 font-size=%2240%22>${pet.type === 'dog' ? '🐕' : '🐈'}</text></svg>'">
         </div>
         <div class="pet-info">
@@ -192,7 +192,7 @@ function createPetCard(pet) {
 function showPurchaseModal(pet) {
     selectedPet = pet;
 
-    modalPetImage.src = `nui://rsg-inventory/html/images/${pet.image}`;
+    modalPetImage.src = `./img/${pet.image}`;
     modalPetImage.onerror = function () {
         this.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="#e8d4a8" width="100" height="100"/><text x="50" y="55" text-anchor="middle" fill="#8b4513" font-size="40">${pet.type === 'dog' ? '🐕' : '🐈'}</text></svg>`;
     };
